@@ -4,7 +4,7 @@ place class
 """
 
 
-from model.basel_model import BaseModel
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):

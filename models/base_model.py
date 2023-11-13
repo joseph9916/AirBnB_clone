@@ -54,7 +54,7 @@ class BaseModel:
         """returns a dictionary containing all keys/values of
         __dict__ of the instance:
         """
-        dictionary = self.__dict__
+        dictionary = dict(self.__dict__)
         dictionary["__class__"] = "{}".format(self.__class__.__name__)
         created_date = copy.deepcopy(self.created_at)
         if not isinstance(self.created_at, str):

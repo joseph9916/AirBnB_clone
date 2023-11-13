@@ -8,6 +8,11 @@ import os
 import json
 from datetime import datetime
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -28,9 +33,9 @@ class FileStorage:
 
     def save(self):
         """serialise __objects to the JSON file (path: __file_path)"""
-        dictionary = {}
-        for key in self.__objects.keys():
-            dictionary[key] = self.__objects[key].to_dict()
+        dictionary = dict(self.__objects)
+        for key in dictionary:
+            dictionary[key] = dictionary[key].to_dict()
         with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump(dictionary, f)
 
@@ -44,7 +49,15 @@ class FileStorage:
                     cls = (objects[key])["__class__"]
                     if cls == "BaseModel":
                         obj = BaseModel(**objects[key])
-                    # if cls == "User":
-                        # obj = User(**objects[key])
+                    if cls == "User":
+                        obj = User(**objects[key])
+                    if cls == "State":
+                        obj = State(**objects[key])
+                    if cls == "Place":
+                        obj = Place(**objects[key])
+                    if cls == "Amenity":
+                        obj = Amenity(**objects[key])
+                    if cls == "Review":
+                        obj = Review(**objects[key])
                     key = "{}.{}".format(obj.__class__.__name__, obj.id)
                     self.__objects[key] = obj
