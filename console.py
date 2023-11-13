@@ -6,6 +6,12 @@ entry point of the command interpreter
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 from models.engine.file_storage import FileStorage
 from models import storage
 import json
@@ -70,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif (args[0] == "BaseModel" or arg[0] == "User" or
+        elif (args[0] == "BaseModel" or args[0] == "User" or
                 args[0] == "Place" or args[0] == "City" or
                 args[0] == "Amenity" or args[0] == "Review"):
             if os.path.isfile("file.json"):
@@ -92,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif (args[0] == "BaseModel" or arg[0] == "User" or
+        elif (args[0] == "BaseModel" or args[0] == "User" or
                 args[0] == "Place" or args[0] == "City" or
                 args[0] == "Amenity" or args[0] == "Review"):
             if os.path.isfile("file.json"):
@@ -109,7 +115,9 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances based or
         not on the class name"""
-        if arg is None or arg == "" or arg == "BaseModel":
+        if (arg is None or arg == "" or arg == "BaseModel"
+               or arg == "User" or arg == "Place" or arg == "City" or
+               arg == "Amenity" or arg == "Review"):
             all_objs = storage.all()
             list_objs = []
             for key in all_objs.keys():
@@ -129,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif (args[0] == "BaseModel" or arg[0] == "User" or
+        elif (args[0] == "BaseModel" or args[0] == "User" or
                 args[0] == "Place" or args[0] == "City" or
                 args[0] == "Amenity" or args[0] == "Review"):
             key = "{}.{}".format(args[0], args[1])
