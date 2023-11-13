@@ -4,6 +4,9 @@ place class
 """
 
 
+from model.basel_model import BaseModel
+
+
 class Place(BaseModel):
     """Place class inherits from Basemodel"""
     city_id = ""
