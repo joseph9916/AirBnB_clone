@@ -9,11 +9,7 @@ from models.base_model import BaseModel
 
 
 b1 = BaseModel()
-dictionary = {'my_number': 89, 'name': 'My First Model',
-              '__class__': 'BaseModel',
-              'updated_at': '2017-09-28T21:05:54.119572',
-              'id': 'b6a6e15c-c67d-4312-9a75-9d084935e579',
-              'created_at': '2017-09-28T21:05:54.119427'}
+dictionary = {'t Model',
 b2 = BaseModel(**dictionary)
 
 
