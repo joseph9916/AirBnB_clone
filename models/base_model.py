@@ -28,7 +28,7 @@ class BaseModel:
                                        (kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"))
                 if key == "my_number":
                     self.my_number = kwargs[key]
-                #setattr(self.__class__, key, kwargs[key])
+                # setattr(self.__class__, key, kwargs[key])
         else:
             from models.__init__ import storage
             self.id = str(uuid.uuid4())

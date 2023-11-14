@@ -119,8 +119,8 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances based or
         not on the class name"""
         if (arg is None or arg == "" or arg == "BaseModel"
-               or arg == "User" or arg == "Place" or arg == "City" or
-               arg == "Amenity" or arg == "Review" or arg == "State"):
+                or arg == "User" or arg == "Place" or arg == "City"
+                or arg == "Amenity" or arg == "Review" or arg == "State"):
             all_objs = storage.all()
             list_objs = []
             for key in all_objs.keys():
@@ -133,77 +133,130 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_count(self, arg):
+        """Count the number of instances"""
+        if (arg is None or arg == "" or arg == "BaseModel"
+                or arg == "User" or arg == "Place" or arg == "City" or
+                arg == "Amenity" or arg == "Review" or arg == "State"):
+            all_objs = storage.all()
+            list_objs = []
+            for key in all_objs.keys():
+                if arg is None:
+                    list_objs.append(all_objs[key].__str__())
+                else:
+                    if arg in key:
+                        list_objs.append(all_objs[key].__str__())
+            print(len(list_objs))
+        else:
+            print("** class doesn't exist **")
+
     def do_User(self, arg):
         """Handles all commands for Users"""
         if "all" in arg:
             self.do_all("User")
-        args = "User {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show(arg)
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(args)
+        elif "count" in arg:
+            self.do_count("User")
+        else:
+            try:
+                args = "User {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_State(self, arg):
         """Shows all instances of States Class"""
         if "all" in arg:
             self.do_all("State")
-        args = "State {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show(args)
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(args)
+        elif "count" in arg:
+            self.do_count("State")
+        else:
+            try:
+                args = "State {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_Place(self, arg):
         """Shows all instances for Places Class"""
         if "all" in arg:
             self.do_all("Place")
-        args = "Place {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show(args)
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(args)
+        elif "count" in arg:
+            self.do_count("Place")
+        else:
+            try:
+                args = "Place {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                if "update" in arg:
+                    self.do_update(args)
+                if "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_City(self, arg):
         """Shows all instances for City Class"""
         if "all" in arg:
             self.do_all("City")
-        args = "City {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show(args)
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(args)
+        elif "count" in arg:
+            self.do_count("City")
+        else:
+            try:
+                args = "City {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_Amenity(self, arg):
         """Shows all instances for Amenity Class"""
         if "all" in arg:
             self.do_all("Amenity")
-        args = "Amenity {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show(args)
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(arg)
+        elif "count" in arg:
+            self.do_count("Amenity")
+        else:
+            try:
+                args = "Amenity {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(arg)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_Review(self, arg):
         """Shows all instances for Review Class"""
         if "all" in arg:
             self.do_all("Review")
-        args = "Amenity {}"re.findall('"([^"]*)"', arg)[0]
-        elif "show" in arg:
-            self.do_show("City")
-        elif "update" in arg:
-            self.do_update(args)
-        elif "destroy" in arg:
-            self.do_destroy(args)
+        elif "count" in arg:
+            self.do_count("Review")
+        else:
+            try:
+                args = "Review {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+                print("** instance id missing **")
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding
