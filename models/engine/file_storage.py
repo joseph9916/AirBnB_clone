@@ -52,6 +52,8 @@ class FileStorage:
                         obj = BaseModel(**objects[key])
                     if cls == "User":
                         obj = User(**objects[key])
+                    if cls == "City":
+                        obj = City(**objects[key])
                     if cls == "State":
                         obj = State(**objects[key])
                     if cls == "Place":
