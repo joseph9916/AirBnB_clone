@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             if os.path.isfile("file.json"):
                 all_objs = storage.all()
                 key = "{}.{}".format(args[0], args[1])
-                if key in all_objs.keys():
+                if key in all_objs:
                     all_objs.pop(key)
                     storage.save()
                 else:
@@ -135,7 +135,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, arg):
         """Count the number of instances"""
-        if (arg is None or arg == "" or arg == "BaseModel"
+        if arg is None or arg == "":
+            print("** class name missing **")
+        elif (arg == "BaseModel"
                 or arg == "User" or arg == "Place" or arg == "City" or
                 arg == "Amenity" or arg == "Review" or arg == "State"):
             all_objs = storage.all()
@@ -147,6 +149,39 @@ class HBNBCommand(cmd.Cmd):
                     if arg in key:
                         list_objs.append(all_objs[key].__str__())
             print(len(list_objs))
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id by adding
+        or updating attribute
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        """
+        all_objs = storage.all()
+        args = arg.split()
+        if arg is None or arg == "":
+            print("** class name missing **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif (args[0] == "BaseModel" or args[0] == "User" or
+                args[0] == "Place" or args[0] == "City" or
+                args[0] == "Amenity" or args[0] == "Review"
+                or args[0] == "State"):
+            key = "{}.{}".format(args[0], args[1])
+            if key in all_objs:
+                obj = all_objs[key]
+                obj_dict = obj.to_dict()
+                if len(args) > 2:
+                    if len(args) == 4:
+                        obj_dict[args[2]] = args[3]
+                        all_objs[key] = obj.__class__(**obj_dict)
+                        storage.save()
+                    else:
+                        print("** value missing **")
+                else:
+                    print("** attribute name missing **")
+            else:
+                print("** no instance found **")
         else:
             print("** class doesn't exist **")
 
@@ -257,58 +292,6 @@ class HBNBCommand(cmd.Cmd):
                     self.do_destroy(args)
             except IndexError:
                 print("** instance id missing **")
-
-    def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding
-        or updating attribute
-        Usage: update <class name> <id> <attribute name> "<attribute value>"
-        """
-        all_objs = storage.all()
-        args = arg.split()
-        if arg is None or arg == "":
-            print("** class name missing **")
-        elif len(args) < 2:
-            print("** instance id missing **")
-        elif (args[0] == "BaseModel" or args[0] == "User" or
-                args[0] == "Place" or args[0] == "City" or
-                args[0] == "Amenity" or args[0] == "Review"
-                or args[0] == "State"):
-            key = "{}.{}".format(args[0], args[1])
-            with open("file.json", "r+", encoding="utf-8") as f:
-                json_string = f.read()
-                all_objs_dict = json.loads(json_string)
-                if key in all_objs_dict.keys():
-                    print("Here")
-                    obj_dict = all_objs_dict[key]
-                    if len(args) >= 3:
-                        if len(args) < 4:
-                            print("** value missing **")
-                        else:
-                            print("Here")
-                            obj_dict[args[2]] = args[3]
-                            if args[0] == "BaseModel":
-                                BaseModel(obj_dict)
-                            if args[0] == "User":
-                                print("Here")
-                                setattr(User, args[2], args[3])
-                            if args[0] == "Place":
-                                Place(obj_dict)
-                            if args[0] == "City":
-                                City(obj_dict)
-                            if args[0] == "Amenity":
-                                Amenity(obj_dict)
-                            if args[0] == "Review":
-                                Review(obj_dict)
-                            if args[0] == "State":
-                                State(obj_dict)
-                            storage.save()
-                            storage.reload()
-                    else:
-                        print("** attribute name missing **")
-                else:
-                    print("** no instance found **")
-        else:
-            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':

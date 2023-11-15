@@ -28,6 +28,40 @@ class BaseModel:
                                        (kwargs[key], "%Y-%m-%dT%H:%M:%S.%f"))
                 if key == "my_number":
                     self.my_number = kwargs[key]
+                if key == "email":
+                    self.email = kwargs[key]
+                if key == "password":
+                    self.password = kwargs[key]
+                if key == "first_name":
+                    self.first_name = kwargs[key]
+                if key == "last_name":
+                    self.last_name = kwargs[key]
+                if key == "state_id":
+                    self.state_id = kwargs[key]
+                if key == "city_id":
+                    self.city_id = kwargs[key]
+                if key == "user_id":
+                    self.user_id = kwargs[key]
+                if key == "description":
+                    self.description = kwargs[key]
+                if key == "number_rooms":
+                    self.number_rooms = kwargs[key]
+                if key == "number_bathrooms":
+                    self.number_bathrooms = kwargs[key]
+                if key == "price_by_night":
+                    self.price_by_night = kwargs[key]
+                if key == "max_guest":
+                    self.max_guest = kwargs[key]
+                if key == "latitude":
+                    self.latitude = kwargs[key]
+                if key == "longtitude":
+                    self.longtitude = kwargs[key]
+                if key == "amenity_ids":
+                    self.amenity_ids = kwargs[key]
+                if key == "place_id":
+                    self.place_id = kwargs[key]
+                if key == "text":
+                    self.text = kwargs[key]
                 # setattr(self.__class__, key, kwargs[key])
         else:
             from models.__init__ import storage
