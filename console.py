@@ -185,6 +185,23 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_BaseModel(self, arg):
+        """Handles all commands for Users"""
+        if "all" in arg:
+            self.do_all("BaseModel")
+        elif "count" in arg:
+            self.do_count("BaseModel")
+        else:
+            try:
+                args = "BaseModel {}".format(re.findall('"([^"]*)"', arg)[0])
+                if "show" in arg:
+                    self.do_show(args)
+                elif "update" in arg:
+                    self.do_update(args)
+                elif "destroy" in arg:
+                    self.do_destroy(args)
+            except IndexError:
+
     def do_User(self, arg):
         """Handles all commands for Users"""
         if "all" in arg:
