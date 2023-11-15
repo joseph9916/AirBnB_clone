@@ -201,6 +201,7 @@ class HBNBCommand(cmd.Cmd):
                 elif "destroy" in arg:
                     self.do_destroy(args)
             except IndexError:
+                print("** instance id missing **")
 
     def do_User(self, arg):
         """Handles all commands for Users"""
